@@ -12,8 +12,7 @@ class FunctionalTest(TestCase):
 
     def test_title(self):
         self.browser.get('http://localhost:8000')
-        self.assertIn('Busco Ayuda', self.browser.title)
-
+        self.assertIn('Busco Ayuda TDD', self.browser.title)
 
     def test_registro(self):
         self.browser.get('http://localhost:8000')
@@ -51,3 +50,16 @@ class FunctionalTest(TestCase):
         p = self.browser.find_element(By.XPATH, "//p[text()='Jorge Runza']")
 
         self.assertIn('Jorge Runza', p.text)
+
+    def test_view_detail(self):
+        self.browser.get('http://localhost:8000')
+        self.browser.implicitly_wait(20)
+        p = self.browser.find_element(By.XPATH, "//p[text()='Jorge Runza']")
+        p.click()
+
+        self.browser.implicitly_wait(5)
+        nombre = self.browser.find_element_by_id('nombre')
+        apellido = self.browser.find_element_by_id('apellido')
+
+        self.assertIn('Jorge', nombre.text)
+        self.assertIn('Runza', apellido.text)
