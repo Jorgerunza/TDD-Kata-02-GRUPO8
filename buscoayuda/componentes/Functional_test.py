@@ -12,7 +12,7 @@ class FunctionalTest(TestCase):
 
     def test_title(self):
         self.browser.get('http://localhost:8000')
-        self.assertIn('Busco Ayuda TDD', self.browser.title)
+        self.assertIn('Busco Ayuda', self.browser.title)
 
     def test_registro(self):
         self.browser.get('http://localhost:8000')
