@@ -36,8 +36,7 @@ app.controller('ctrl_register', function ($scope, $http) {
                 headers: {'Content-Type': 'application/x-www-form-urlencoded'}
             })
                 .success(function (data, status) {
-                    alert('Se registró satisfactoriamente la información');
-                    window.location.href = "/login/";
+                    window.location.href = "/";
                 }).error(function (data, status) {
                 alert('Se presentó un error registrando la información, intente de nuevo\n\n' + data);
             })

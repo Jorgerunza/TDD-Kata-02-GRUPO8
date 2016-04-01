@@ -11,7 +11,7 @@ from .mail import Mail
 
 
 def index(request):
-    listaidependientes = Independiente.objects.all().order_by('fechaRegistro')
+    listaidependientes = Independiente.objects.all().order_by('-fechaRegistro')
     context = {'listaidependientes': listaidependientes}
     return render(request, 'componentes/index.html', context)
 
@@ -20,10 +20,10 @@ def index_por_servicio(request, value):
     if request.method == 'GET':
         try:
             if value == -1:
-                listaidependientes = Independiente.objects.all().order_by('fechaRegistro')
+                listaidependientes = Independiente.objects.all().order_by('-fechaRegistro')
             else:
                 id_servicio = value
-                listaidependientes = Independiente.objects.filter(idServicio=id_servicio).order_by('fechaRegistro')
+                listaidependientes = Independiente.objects.filter(idServicio=id_servicio).order_by('-fechaRegistro')
                 context = {'listaidependientes': listaidependientes}
                 return render(request, 'componentes/index.html', context)
         except Exception as e:
@@ -148,10 +148,10 @@ def ver_independientes_por_filtro(request, value):
     if request.method == 'GET':
         try:
             if value == -1:
-                independientes = Independiente.objects.all().order_by('fechaRegistro')
+                independientes = Independiente.objects.all().order_by('-fechaRegistro')
             else:
                 id_servicio = value
-                independientes = Independiente.objects.filter(idServicio=id_servicio).order_by('fechaRegistro')
+                independientes = Independiente.objects.filter(idServicio=id_servicio).order_by('-fechaRegistro')
             return HttpResponse(serializers.serialize('json', independientes))
         except Exception as e:
             return HttpResponse(json.dumps(e.args), content_type="application/json", status=400)
@@ -170,7 +170,7 @@ def ver_servicios(request):
 def api_independientes(request):
     if request.method == 'GET':
         try:
-            independientes = Independiente.objects.all().order_by('fechaRegistro')
+            independientes = Independiente.objects.all().order_by('-fechaRegistro')
             return HttpResponse(serializers.serialize('json', independientes))
 
         except Exception as e:
@@ -225,10 +225,10 @@ def api_independientes_por_servicio(request, value):
     if request.method == 'GET':
         try:
             if value == -1:
-                independientes = Independiente.objects.all().order_by('fechaRegistro')
+                independientes = Independiente.objects.all().order_by('-fechaRegistro')
             else:
                 id_servicio = value
-                independientes = Independiente.objects.filter(idServicio=id_servicio).order_by('fechaRegistro')
+                independientes = Independiente.objects.filter(idServicio=id_servicio).order_by('-fechaRegistro')
             return HttpResponse(serializers.serialize('json', independientes))
         except Exception as e:
             return HttpResponse(json.dumps(e.args), content_type="application/json", status=400)
