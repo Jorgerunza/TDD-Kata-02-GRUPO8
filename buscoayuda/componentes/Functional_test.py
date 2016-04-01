@@ -64,9 +64,9 @@ class FunctionalTest(TestCase):
         self.assertIn('Jorge', nombre.text)
         self.assertIn('Runza', apellido.text)
 
-    def test_login(self):
+    def test_view_login(self):
         self.browser.get('http://localhost:8000')
-        self.browser.implicitly_wait(10)
+        self.browser.implicitly_wait(30)
 
         link = self.browser.find_element_by_id('pagLog')
         link.click()
