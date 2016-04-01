@@ -10,11 +10,11 @@ class FunctionalTest(TestCase):
     def tearDown(self):
         self.browser.quit()
 
-    def test_title(self):
+    def test1_title(self):
         self.browser.get('http://localhost:8000')
         self.assertIn('Busco Ayuda', self.browser.title)
 
-    def test_registro(self):
+    def test2_registro(self):
         self.browser.get('http://localhost:8000')
         link = self.browser.find_element_by_id('id_register')
         link.click()
@@ -51,9 +51,9 @@ class FunctionalTest(TestCase):
 
         self.assertIn('Jorge Runza', p.text)
 
-    def test_view_detail(self):
+    def test3_view_detail(self):
         self.browser.get('http://localhost:8000')
-        self.browser.implicitly_wait(20)
+        self.browser.implicitly_wait(10)
         p = self.browser.find_element(By.XPATH, "//p[text()='Jorge Runza']")
         p.click()
 
@@ -64,9 +64,9 @@ class FunctionalTest(TestCase):
         self.assertIn('Jorge', nombre.text)
         self.assertIn('Runza', apellido.text)
 
-    def test_view_login(self):
+    def test4_login(self):
         self.browser.get('http://localhost:8000')
-        self.browser.implicitly_wait(30)
+        self.browser.implicitly_wait(10)
 
         link = self.browser.find_element_by_id('pagLog')
         link.click()
@@ -81,3 +81,35 @@ class FunctionalTest(TestCase):
         botonLogin.click()
         self.browser.implicitly_wait(3)
         p = self.browser.find_element(By.XPATH, "//p[text()='Jorge Runza']")
+
+
+    def test5_Edit(self):
+        self.browser.get('http://localhost:8000')
+        self.browser.implicitly_wait(10)
+
+        link = self.browser.find_element_by_id('pagEd')
+        link.click()
+
+        nombre = self.browser.find_element_by_id('nombre')
+        nombre.send_keys('Jorge David')
+
+        apellidos = self.browser.find_element_by_id('apellidos')
+        apellidos.send_keys('Runza Gualdron')
+
+        aniosExperiencia = self.browser.find_element_by_id('aniosExperiencia')
+        aniosExperiencia.send_keys('10')
+
+        telefono = self.browser.find_element_by_id('telefono')
+        telefono.send_keys('6718777')
+
+        self.browser.implicitly_wait(10)
+        p = self.browser.find_element(By.XPATH, "//p[text()='Jorge David Runza Gualdron']")
+        p.click()
+
+
+        self.browser.implicitly_wait(5)
+        nombre = self.browser.find_element_by_id('nombre')
+        apellido = self.browser.find_element_by_id('apellido')
+
+        self.assertIn('Jorge David', nombre.text)
+        self.assertIn('Runza Gualdron', apellido.text)
